@@ -14,27 +14,23 @@ export function convertCurrency(
   rateStr: string,
   from: "brl" | "foreing"
 ): string {
-  // Remove tudo que não for número, vírgula ou ponto
-  const cleanValue = valueStr.replace(/[^\d.,]/g, "");
-  const cleanRate = rateStr.replace(/[^\d.,]/g, "");
+  const cleanValue = valueStr.replace(/[^\d.,]/g, "").replace(",", ".");
+  const cleanRate = rateStr.replace(",", ".").replace(/[^\d.]/g, "");
 
-  // Normaliza vírgula para ponto (para o parseFloat funcionar)
-  const value = parseFloat(cleanValue.replace(",", "."));
-  const rate = parseFloat(cleanRate.replace(",", "."));
+  const value = parseFloat(cleanValue);
+  const rate = parseFloat(cleanRate);
 
-  if (isNaN(value) || isNaN(rate) || rate === 0) return "1";
+  if (isNaN(value) || isNaN(rate) || rate === 0) return "0,00";
 
   if (from === "brl") {
-    // Real → Estrangeira
     return formatNumbeToStringrBR(value / rate);
   }
 
   if (from === "foreing") {
-    // Estrangeira → Real
     return formatNumbeToStringrBR(value * rate);
   }
 
-  return "2";
+  return "0,00";
 }
 
 export function formatMoneyInput(value: string): string {
