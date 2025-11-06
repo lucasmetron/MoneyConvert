@@ -1,18 +1,19 @@
 import React from "react";
 
-import { Text, View } from "react-native";
+import { Text, View, TextInput } from "react-native";
 import { styles } from "./styles";
 import useMoneyValue from "../../store/useMoneyValue";
 import { MoneyType } from "../../types/TypeMoney";
+import { convertCurrency, formatMoneyInput } from "../../utils/funtions";
 
 interface ExchangeMoneyProps {
   typeMoney: MoneyType;
-  value: string;
+  valueForeing: string;
 }
 
-const ExchangeMoney = ({ typeMoney, value }: ExchangeMoneyProps) => {
-  const dolarValue = useMoneyValue((state) => state.dolar);
-  const euroValue = useMoneyValue((state) => state.euro);
+const ExchangeMoney = ({ typeMoney, valueForeing }: ExchangeMoneyProps) => {
+  const [valueReal, setValueReal] = React.useState("0,00");
+  const [valueMoney, setValueMoney] = React.useState(valueForeing);
 
   function returnDataByTypeMoney(typeMoney) {
     switch (typeMoney) {
@@ -42,7 +43,17 @@ const ExchangeMoney = ({ typeMoney, value }: ExchangeMoneyProps) => {
           <Text style={styles.acronym}>BRL</Text>
         </View>
 
-        <Text style={styles.valueMoney}>1.678,08</Text>
+        <TextInput
+          style={styles.valueMoney}
+          keyboardType="decimal-pad"
+          maxLength={10}
+          value={valueReal}
+          onChangeText={(text) => {
+            const formatted = formatMoneyInput(text);
+            setValueReal(formatted);
+            setValueMoney(convertCurrency(formatted, valueForeing, "brl"));
+          }}
+        />
       </View>
 
       <Text style={styles.title}>
@@ -60,13 +71,20 @@ const ExchangeMoney = ({ typeMoney, value }: ExchangeMoneyProps) => {
           </Text>
         </View>
 
-        <Text style={styles.valueMoney}>1.678,08</Text>
+        <TextInput
+          style={styles.valueMoney}
+          keyboardType="decimal-pad"
+          maxLength={10}
+          value={valueMoney}
+          onChangeText={(text) => {
+            const formatted = formatMoneyInput(text);
+            setValueMoney(formatted);
+            setValueReal(convertCurrency(formatted, valueForeing, "foreing"));
+          }}
+        />
       </View>
     </View>
   );
 };
 
 export default ExchangeMoney;
-
-// <Text>🇺🇸</Text>
-//           <Text>🇪🇺</Text>

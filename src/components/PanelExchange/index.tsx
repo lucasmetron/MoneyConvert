@@ -16,7 +16,7 @@ const PanelExchange = ({ typeMoney, value }: PanelExchangeProps) => {
     <ScrollView style={styles.scrollBox}>
       <View style={styles.container}>
         <View style={styles.box}>
-          <ExchangeMoney typeMoney={typeMoney} value={value} />
+          <ExchangeMoney typeMoney={typeMoney} valueForeing={value} />
         </View>
 
         <ShowExchangeText typeMoney={typeMoney} value={value} />

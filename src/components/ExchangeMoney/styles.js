@@ -60,6 +60,7 @@ export const styles = StyleSheet.create({
   },
 
   valueMoney: {
+    width: "auto",
     fontSize: 20,
     fontWeight: "bold",
     color: "#1F1F1F",
