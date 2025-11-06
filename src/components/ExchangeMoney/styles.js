@@ -1,9 +1,6 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  scollBox: {
-    width: "100%",
-  },
   boxValues: {
     width: "100%",
     borderRadius: 5,
@@ -14,8 +11,13 @@ export const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "bold",
     color: "#515151",
+    marginBottom: 5,
   },
   boxValue: {
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 10,
+    flexDirection: "row",
     borderColor: "#D1D1D1",
     backgroundColor: "#FFFFFF",
     borderWidth: 1,
@@ -24,31 +26,39 @@ export const styles = StyleSheet.create({
     paddingBottom: 5,
     paddingLeft: 10,
     paddingRight: 10,
-    flexDirection: "row",
+    marginBottom: 20,
   },
 
   flagBox: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: "#D1D1D1",
     backgroundColor: "#FFFFFF",
-    borderRadius: 25,
+    borderRadius: 20,
+  },
+
+  flagAndText: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+
+  acronym: {
+    fontSize: 13,
+    fontWeight: "bold",
+    color: "#818181",
+  },
+
+  valueMoney: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#1F1F1F",
   },
 
   flag: {
-    fontSize: 30,
-  },
-
-  container: {
-    width: "100%",
-    flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
+    fontSize: 25,
   },
 });
