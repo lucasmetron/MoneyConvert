@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Text, View, TextInput } from "react-native";
+import { Text, View, TextInput, Platform } from "react-native";
 import { styles } from "./styles";
 import useMoneyValue from "../../store/useMoneyValue";
 import { MoneyType } from "../../types/TypeMoney";
@@ -45,7 +45,7 @@ const ExchangeMoney = ({ typeMoney, valueForeing }: ExchangeMoneyProps) => {
 
         <TextInput
           style={styles.valueMoney}
-          keyboardType="decimal-pad"
+          keyboardType={Platform.OS === "ios" ? "decimal-pad" : "numeric"}
           maxLength={10}
           value={valueReal}
           onChangeText={(text) => {
@@ -73,7 +73,7 @@ const ExchangeMoney = ({ typeMoney, valueForeing }: ExchangeMoneyProps) => {
 
         <TextInput
           style={styles.valueMoney}
-          keyboardType="decimal-pad"
+          keyboardType={Platform.OS === "ios" ? "decimal-pad" : "numeric"}
           maxLength={10}
           value={valueMoney}
           onChangeText={(text) => {

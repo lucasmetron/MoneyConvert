@@ -14,24 +14,27 @@ export function convertCurrency(
   rateStr: string,
   from: "brl" | "foreing"
 ): string {
-  // Converte "5,25" para número 5.25
-  const value = parseFloat(valueStr.replace(",", "."));
-  const rate = parseFloat(rateStr.replace(",", "."));
+  // Remove tudo que não for número, vírgula ou ponto
+  const cleanValue = valueStr.replace(/[^\d.,]/g, "");
+  const cleanRate = rateStr.replace(/[^\d.,]/g, "");
 
-  // Verifica se são números válidos e se o rate não é zero
-  if (isNaN(value) || isNaN(rate) || rate === 0) return "0,00";
+  // Normaliza vírgula para ponto (para o parseFloat funcionar)
+  const value = parseFloat(cleanValue.replace(",", "."));
+  const rate = parseFloat(cleanRate.replace(",", "."));
+
+  if (isNaN(value) || isNaN(rate) || rate === 0) return "1";
 
   if (from === "brl") {
-    // de real → moeda estrangeira
+    // Real → Estrangeira
     return formatNumbeToStringrBR(value / rate);
   }
 
   if (from === "foreing") {
-    // de moeda estrangeira → real
+    // Estrangeira → Real
     return formatNumbeToStringrBR(value * rate);
   }
 
-  return "0,00";
+  return "2";
 }
 
 export function formatMoneyInput(value: string): string {
